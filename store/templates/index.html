@@ -1,0 +1,22 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid mt-3">
+    <div class="row mx-auto">
+        {% for product in products %}
+        <div class="card mx-auto mb-3" style="width: 18rem;">
+            <img src="{{product.image.url}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{product.name}}</h5>
+              <p class="card-text"><b>{{product.price}}/-</b></p>
+              <a href="#" class="btn btn-light border btn-sm">Add to Cart</a>
+            </div>
+        </div>
+        {% endfor%}
+      </div>
+  </div>
+
+{% endblock %}
+  

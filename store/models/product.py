@@ -6,3 +6,8 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     description = models.TextField(max_length=100,default='', blank=True)
     image = models.ImageField(upload_to='uploads/products/')
+
+
+    @staticmethod
+    def get_all_products():
+        return Product.objects.all()

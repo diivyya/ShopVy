@@ -3,6 +3,8 @@
 
 {% block content %}
 
+{% load cart %}
+
 <div class="container-fluid mt-3">
     <div class="row">
         <!--      Filters       -->
@@ -24,13 +26,22 @@
                     <div class="card-body">
                       <h5 class="card-title">{{product.name}}</h5>
                       <p class="card-text"><b>{{product.price}}/-</b></p>
-                      
+                    </div>
 
-                      <form action="/" method="post">
-                          {% csrf_token %}
-                          <input hidden type="text" name="product_id" value="{{product.id}}">
-                          <input type="submit" class="btn btn-light border btn-sm" value="Add to Cart">
-                      </form>
+                    <div class="card-footer p-0">
+                        {% if product|is_in_cart:request.session.cart %}
+                        <div class="row">
+                            <input type="submit" value=" - " class="col-2 btn btn-block btn-secondary">
+                            <div class="text-center col">{{product|product_count:request.session.cart}}</div>
+                            <input type="submit" value=" + " class="col-2 btn btn-block btn-secondary">
+                        </div>
+                        {% else %}
+                        <form action="/" method="post" class="btn-block row">
+                            {% csrf_token %}
+                            <input hidden type="text" name="product_id" value="{{product.id}}">
+                            <input type="submit" class="float-right btn btn-block btn-light form-control" value="Add to Cart">
+                        </form>
+                        {% endif %}
                     </div>
                 </div>
                 {% endfor%}

@@ -17,3 +17,16 @@ def product_count(product, cart):
         if int(id) == product.id:
             return cart[id]
     return 0
+
+@register.filter(name="price_total")
+def price_total(product, cart):
+    return product.price * product_count(product, cart)
+
+@register.filter(name="order_total")
+def order_total(products, cart):
+    sum = 0
+    for product in products:
+        sum = sum + price_total(product,cart)
+    return sum
+
+    

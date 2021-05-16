@@ -8,6 +8,12 @@ class Product(models.Model):
     description = models.TextField(max_length=100,default='', blank=True)
     image = models.ImageField(upload_to='uploads/products/')
 
+    def __str__(self):
+        return self.name
+
+    @staticmethod
+    def get_products_by_id(ids):
+        return Product.objects.filter(id__in=ids)
 
     @staticmethod
     def get_all_products():

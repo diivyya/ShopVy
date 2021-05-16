@@ -18,8 +18,7 @@ class Login(View):
 
         if customer:
             if check_password(password, customer.password):
-                request.session['customer_id'] = customer.id
-                request.session['email'] = customer.email
+                request.session['customer'] = customer.id
                 return redirect('homepage')
             else:
                 errorMessage = 'Wrong Password!!'
@@ -30,3 +29,8 @@ class Login(View):
             'error': errorMessage
         }
         return render(request, 'login.html', formData)
+
+
+def logout(request):
+    request.session.clear()
+    return redirect('homepage')

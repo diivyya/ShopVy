@@ -29,6 +29,7 @@
                       <p class="card-text"><b>{{product.price|currency}}</b></p>
                     </div>
 
+                    <!--Add to Cart buttons-->
                     <div class="card-footer p-0">
                         {% if product|is_in_cart:request.session.cart %}
                         <div class="row">
